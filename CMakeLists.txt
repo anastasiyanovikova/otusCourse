@@ -5,38 +5,38 @@ set(PROJECT_VESRION 0.0.${PATCH_VERSION})
 
 project(ip_filter VERSION ${PROJECT_VESRION})
 
-add_executable(ip_filter_cli ip_filter.cpp)
-add_library(ip_filter lib.cpp)
+add_executable(ip_filter ip_filter.cpp)
+add_library(ip_filter_lib lib.cpp)
 
-set_target_properties(ip_filter ip_filter_cli PROPERTIES
+set_target_properties(ip_filter_lib ip_filter PROPERTIES
     CXX_STANDARD 14
     CXX_STANDARD_REQUIRED ON
 )
-target_include_directories(ip_filter
+target_include_directories(ip_filter_lib
     PRIVATE "${CMAKE_BINARY_DIR}"
 )
 
-target_link_libraries(ip_filter_cli
-ip_filter
+target_link_libraries(ip_filter
+ip_filter_lib
 )
 
 if (MSVC)
-    target_compile_options(ip_filter PRIVATE
+    target_compile_options(ip_filter_lib PRIVATE
         /W4
     )
-    target_compile_options(ip_filter_cli PRIVATE
+    target_compile_options(ip_filter PRIVATE
         /W4
     )
 else ()
-    target_compile_options(ip_filter PRIVATE
+    target_compile_options(ip_filter_lib PRIVATE
         -Wall -Wextra -pedantic -Werror
     )
-    target_compile_options(ip_filter_cli PRIVATE
+    target_compile_options(ip_filter PRIVATE
         -Wall -Wextra -pedantic -Werror
     )
 endif()
 
-install(TARGETS ip_filter_cli RUNTIME DESTINATION bin)
+install(TARGETS ip_filter RUNTIME DESTINATION bin)
 
 set(CPACK_GENERATOR DEB)
 
