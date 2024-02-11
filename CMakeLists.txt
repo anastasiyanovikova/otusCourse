@@ -16,7 +16,7 @@ target_include_directories(ip_filter
     PRIVATE "${CMAKE_BINARY_DIR}"
 )
 
-target_link_libraries(ip_filter_cli PRIVATE
+target_link_libraries(ip_filter_cli
 ip_filter
 )
 
