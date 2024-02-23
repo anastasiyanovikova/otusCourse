@@ -60,22 +60,35 @@ int main(int, char const **)
         }
         
         // TODO filter by first byte and output
-        filter(ip_pool, 1);
+        //filter(ip_pool, 1);
 
+        std::map<int, int> filterdVals;
+        filterdVals.insert({0,1});
+        filterOneFunc(ip_pool, filterdVals, true);
         // 1.231.69.33
         // 1.87.203.225
         // 1.70.44.170
         // 1.29.168.152
         // 1.1.234.8
         // TODO filter by first and second bytes and output
-        filter(ip_pool, 46, 70);
+        //filter(ip_pool, 46, 70);
+        filterdVals.clear();
+        filterdVals.insert({0,46});
+        filterdVals.insert({1,70});
+        filterOneFunc(ip_pool, filterdVals, true);
 
         // 46.70.225.39
         // 46.70.147.26
         // 46.70.113.73
         // 46.70.29.76
 
-        filter_any(ip_pool, 46);
+        //filter_any(ip_pool, 46);
+        filterdVals.clear();
+        filterdVals.insert({0,46});
+        filterdVals.insert({1,46});
+        filterdVals.insert({2,46});
+        filterdVals.insert({3,46});
+        filterOneFunc(ip_pool, filterdVals, false);
 
         // 186.204.34.46
         // 186.46.222.194

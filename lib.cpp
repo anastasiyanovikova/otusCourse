@@ -26,7 +26,7 @@ bool sortIp(std::vector<std::vector<int>>& items)
             if(firstEl.at(i) > SecondEl.at(i))
                 return true;
         }
-        if(firstS < secondS)
+        if(firstS <= secondS)
             return false;
         return true;
     });
@@ -93,6 +93,58 @@ bool filter_any(const std::vector<std::vector<int>>& items, int value)
                 break;
             }
         }
+    }
+    return true;
+}
+
+bool filterOneFunc(const std::vector<std::vector<int>>& items, std::map<int, int> positionValueMap, bool allValues)
+{
+    for(auto it = items.cbegin(); it != items.cend(); ++it)
+    {
+        bool printStr = true;
+        bool oneValFound = false;
+        for(auto itVal = positionValueMap.begin(); itVal != positionValueMap.end(); itVal++)
+        {
+            long unsigned int i = itVal->first;
+            int val = itVal->second;
+
+            if(i>=it->size())
+            {
+                if(allValues)
+                {
+                    printStr = false;
+                    break;
+                }
+                continue;
+            }
+
+            if(it->at(i) == val)
+            {
+                oneValFound = true;
+                if(!allValues)
+                    break;
+            }
+            else if(allValues)
+            {
+                printStr = false;
+                break;
+            }
+        }
+
+        if(printStr && oneValFound)
+        {
+            for(auto ip_part = it->cbegin(); ip_part != it->cend(); ++ip_part)
+                {
+                    if (ip_part != it->cbegin())
+                    {
+                        std::cout << ".";
+
+                    }
+                    std::cout << *ip_part;
+                }
+                std::cout << std::endl;
+        }
+
     }
     return true;
 }
